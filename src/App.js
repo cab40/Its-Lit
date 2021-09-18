@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
+import React from 'react';
+import Header from './Components/Header.js';
+import Cards from './Components/Cards.js';
+import {data} from './Components/data.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      songs: data,
+      activePage: 'homepage',
+    }
+  }
+  render (){
+    return (
+      <div className="App" style={{width:'100%', height:'100%'}}>
+        <Header />
+        <div className = 'row'>
+          <Cards songs={this.state.songs}/>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;

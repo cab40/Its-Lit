@@ -1,10 +1,18 @@
-.App {
-  text-align: center;
+body {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  background-image: url(./Assets/background2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -22,17 +30,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
