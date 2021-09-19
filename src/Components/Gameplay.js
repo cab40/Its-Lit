@@ -7,7 +7,7 @@ import Countdown from 'react-countdown';
 
 import '../App.css';
 
-const time_length = { minutes: 2, seconds: 47 }
+const time_length = { minutes: 0, seconds: 10 }
 
 const displaySec = (seconds) => {
     if (seconds < 10) return "0" + seconds;
@@ -18,12 +18,6 @@ class DisplayPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            //score variable?
-            //image: 'https://upload.wikimedia.org/wikipedia/en/7/70/Graduation_%28album%29.jpg',
-            /*image: 'https://upload.wikimedia.org/wikipedia/en/1/1e/Cage_the_Elephant_Melophobia.jpg',
-            song: 'Cigarette Daydreams',
-            artist: 'Cage the Elephant',
-            length: '3:28'*/
             image: "https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg",
             song: "Golden",
             artist: "Harry Styles"
@@ -34,9 +28,12 @@ class DisplayPage extends React.Component {
         return (
             <div className="App" style={{ width: '100%', height: '100%' }}>
                 <div className="col">
+                    {this.props.completed?
+                    <>
                     <h1 className="glow title">SCORE:</h1>
-                    {this.props.started?
-                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1> : <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>100%</h1>}
+                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1> 
+                    </>:
+                    <h1 className="glow-pi title-big" style={{ fontSize: '8rem', padding: '1rem' }}>Currently Playing</h1>}
                     <div className="row musicCard">
                         <div className="col">
                             <img src={this.state.image} style={{ width: '158px', height: '158px', objectFit: 'cover', borderRadius: '8px', marginTop: '10px' }}></img>
@@ -48,7 +45,10 @@ class DisplayPage extends React.Component {
                                 </div>
                                 <div className="row t-white">
                                     <div className="col" style={{ paddingBottom: '5%', paddingTop: '5%' }}>
-                                        <Progress value={100 - 100 * (60 * this.props.minutes + this.props.seconds) / (time_length.minutes * 60 + time_length.seconds)} />
+                                        <Progress 
+                                        /*value={100 - 100 * (60 * this.props.minutes + this.props.seconds) / (time_length.minutes * 60 + time_length.seconds)} */
+                                        value={90+10-this.props.seconds}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -77,15 +77,19 @@ class Gameplay extends React.Component {
             song: 'Cigarette Daydreams',
             artist: 'Cage the Elephant',
             length: '3:28',
-            started: false
+            started: 'paused' 
         }
     }
 
     onSubmit = () => {
-        this.countdownref.start();
-        this.setState({
-            started: true
-        })
+        if(this.state.started !== 'playing'){
+            this.countdownref.start();
+            this.setState({
+                started: true
+            })
+        } else{
+            this.countdownref.pause();
+        }
     }
 
     render() {
@@ -94,7 +98,7 @@ class Gameplay extends React.Component {
                     ref={(ref) => {this.countdownref = ref;}}
                     autoStart={false}
                     date={Date.now() + (time_length.minutes*60+ time_length.seconds)*1000}
-                    renderer={({minutes, seconds}) => <DisplayPage minutes={minutes} seconds={seconds} onSubmit={this.onSubmit} started={this.state.started}/>}
+                    renderer={({minutes, seconds, completed}) => <DisplayPage minutes={minutes} seconds={seconds} completed={completed} onSubmit={this.onSubmit} started={this.state.started}/>}
                 />
         );
     }
