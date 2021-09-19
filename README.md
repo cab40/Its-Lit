@@ -1,4 +1,4 @@
-# Repository for "IT'S LIT" submitted to Hack the North 2021
+# "IT'S LIT" submitted to Hack the North 2021
 
 ## Front End App
 Install node modules with ```yarn install```.
