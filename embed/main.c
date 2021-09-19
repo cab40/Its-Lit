@@ -180,9 +180,10 @@ void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t d
 }
 
 void * startButtonStuff(void * arg){
-    //int buttonStuff;
-    //while(!musicEnd){
-    //    buttonStuff = digitalRead(BLUE_BUTTON);
+    int buttonStuff;
+    while(!musicEnd){
+        buttonStuff = digitalRead(BLUE_BUTTON);
+        printf(digitalRead(BLUE_BUTTON));
     //    if(buttonStuff) pressedBlue++;
 
     //    buttonStuff = digitalRead(RED_BUTTON);
@@ -192,7 +193,7 @@ void * startButtonStuff(void * arg){
     //    if(buttonStuff) pressedGreen++;
     //    buttonStuff = digitalRead(YELLOW_BUTTON);
     //    if(buttonStuff) pressedYellow++;
-    //}
+    }
     void * smth = malloc(5);
     return smth;
 }
@@ -215,7 +216,7 @@ void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes) {
     if(isActive(redYellow, 1) && pressedRed >= 1) (*rightNotes)++;
     else if(!isActive(redYellow, 1) && pressedRed== 0) (*rightNotes)++;
 
-    if(isActive(redYellow, 0) && pressedYellow>= 1) (*rightNotes)++;
+    if(isActive(redYellow, 0) && pressedYellow >= 1) (*rightNotes)++;
     else if(!isActive(redYellow, 0) && pressedYellow== 0) (*rightNotes)++;
 
     pressedYellow = 0;
