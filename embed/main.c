@@ -75,7 +75,6 @@ int main(){
     }
     button_thread_info buttonThread;
     buttonThread.threadNum = 1;
-    pthread_create(&(buttonThread.threadId), &threadAttr, &startButtonStuff, NULL);
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
@@ -99,6 +98,7 @@ int main(){
             pinMode(pins[i], OUTPUT);
         }
     }
+    pthread_create(&(buttonThread.threadId), &threadAttr, &startButtonStuff, NULL);
 
     int i = 0;
     int shiftBits[2]; //(blue, green) and (yellow, red)
@@ -183,16 +183,15 @@ void * startButtonStuff(void * arg){
     int buttonStuff;
     while(!musicEnd){
         buttonStuff = digitalRead(BLUE_BUTTON);
-        printf(digitalRead(BLUE_BUTTON));
-    //    if(buttonStuff) pressedBlue++;
+        if(buttonStuff) pressedBlue++;
 
-    //    buttonStuff = digitalRead(RED_BUTTON);
-    //    if(buttonStuff) pressedRed++;
+        buttonStuff = digitalRead(RED_BUTTON);
+        if(buttonStuff) pressedRed++;
 
-    //    buttonStuff = digitalRead(GREEN_BUTTON);
-    //    if(buttonStuff) pressedGreen++;
-    //    buttonStuff = digitalRead(YELLOW_BUTTON);
-    //    if(buttonStuff) pressedYellow++;
+        buttonStuff = digitalRead(GREEN_BUTTON);
+        if(buttonStuff) pressedGreen++;
+        buttonStuff = digitalRead(YELLOW_BUTTON);
+        if(buttonStuff) pressedYellow++;
     }
     void * smth = malloc(5);
     return smth;
