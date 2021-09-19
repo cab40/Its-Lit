@@ -34,7 +34,7 @@ class Gameplay extends React.Component{
                 <h1 className="glow-pi title-big" style={{fontSize:'9rem', padding:'1rem'}}>{'69%'}</h1>
                 <div className="row musicCard">
                     <div className="col">
-                        <img src={this.state.image} style={{width:'158px', height:'158px', objectFit:'cover', borderRadius:'8px', marginTop:'10px'}}></img>
+                        <img src={this.state.image} style={{width:'110%', height:'100%', objectFit:'cover', borderRadius:'8px', margin:'0px auto', marginLeft:'-20px'}}></img>
                     </div>
                     <div className="col-10">
                         <div className="row">
