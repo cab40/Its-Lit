@@ -56,7 +56,7 @@ class DisplayPage extends React.Component {
                             <div className="row t-white" style={{ textAlign: 'center' }}>
                                 <h3 className="col t-white" style={{ textAlign: 'left' }}>{this.state.song} - {this.state.artist}</h3>
                                 <div className="col-4">
-                                    <Button onClick={this.props.onSubmit} className='t-white' size='m' style={{ marginLeft: '70%', width: '100px', backgroundColor: '#5474E1' }}>{this.props.started? "Stop ": "Start"}</Button>
+                                    <Button onClick={this.props.onSubmit} className='t-white' size='m' style={{ marginLeft: '70%', width: '100px', backgroundColor: '#5474E1' }}>{this.props.started? "Stop": "Start"}</Button>
                                 </div>
                             </div>
                         </div>
@@ -77,17 +77,20 @@ class Gameplay extends React.Component {
             song: 'Cigarette Daydreams',
             artist: 'Cage the Elephant',
             length: '3:28',
-            started: 'paused' 
+            started: false 
         }
     }
 
     onSubmit = () => {
-        if(this.state.started !== 'playing'){
+        if(this.state.started == false){
             this.countdownref.start();
             this.setState({
                 started: true
             })
         } else{
+            this.setState({
+                started: false 
+            })
             this.countdownref.pause();
         }
     }
