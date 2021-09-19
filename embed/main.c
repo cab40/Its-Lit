@@ -47,7 +47,7 @@ void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
 int isActive(u_int8_t data, int low);
 void startButtonStuff();
-void addToRightStuff(u_int8_t * rightNotes, u_int8_t * totalNotes);
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, u_int8_t * rightNotes);
 
 //sorta inter thread communication via shared memory....
 //way too late to do proper synchronization and critical section protection things
@@ -117,7 +117,7 @@ int main(){
         totalNotes += 4;
 
         delay(500);
-        addToRightStuff(&rightNotes);
+        addToRightStuff(blueGreen, redYellow, &rightNotes);
     }
 
     for(int j = 0;j < 4;j++){ //shift 4 more times at end of song to make sure the notes finish
@@ -128,7 +128,7 @@ int main(){
 
         totalNotes += 4;
         delay(500);
-        addToRightStuff(&rightNotes);
+        addToRightStuff(blueGreen, redYellow, &rightNotes);
     }
 
     musicEnd = true;
@@ -203,18 +203,18 @@ int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
     }
 }
 
-void addToRightStuff(u_int8_t * rightNotes) {
-    if(isActive(blueGreen, 1) && pressedBlue >= 1) *rightNotes++;
-    else if(!isActive(blueGreen, 1) && pressedBlue == 0) *rightNotes++;
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, u_int8_t * rightNotes) {
+    if(isActive(blueGreen, 1) && pressedBlue >= 1) (*rightNotes)++;
+    else if(!isActive(blueGreen, 1) && pressedBlue == 0) (*rightNotes)++;
 
-    if(isActive(blueGreen, 0) && pressedGreen >= 1) *rightNotes++;
-    else if(!isActive(blueGreen, 0) && pressedGreen == 0) *rightNotes++;
+    if(isActive(blueGreen, 0) && pressedGreen >= 1) (*rightNotes)++;
+    else if(!isActive(blueGreen, 0) && pressedGreen == 0) (*rightNotes)++;
 
-    if(isActive(redYellow, 1) && pressedRed >= 1) *rightNotes++;
-    else if(!isActive(redYellow, 1) && pressedRed== 0) *rightNotes++;
+    if(isActive(redYellow, 1) && pressedRed >= 1) (*rightNotes)++;
+    else if(!isActive(redYellow, 1) && pressedRed== 0) (*rightNotes)++;
 
-    if(isActive(redYellow, 0) && pressedYellow>= 1) *rightNotes++;
-    else !if(!isActive(redYellow, 0) && pressedYellow== 0) *rightNotes++;
+    if(isActive(redYellow, 0) && pressedYellow>= 1) (*rightNotes)++;
+    else if(!isActive(redYellow, 0) && pressedYellow== 0) (*rightNotes)++;
 
     pressedYellow = 0;
     pressedRed = 0;
