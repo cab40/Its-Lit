@@ -23,7 +23,7 @@ class SongCarousel extends Component {
     },
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styls" stars={3}/>
+      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styles" stars={3}/>
     }
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };

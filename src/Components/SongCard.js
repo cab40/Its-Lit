@@ -1,14 +1,7 @@
 import React, {Component} from "react";
 import { Button, Row} from "reactstrap";
 import { Rating } from 'react-simple-star-rating';
-
-class Star extends Component {
-    render(){
-        return(
-            <i class="fas fa-star"></i>
-        )
-    }
-}
+import {Link} from "react-router-dom";
 
 export default class SongCard extends Component {
     constructor(props){
@@ -26,12 +19,12 @@ export default class SongCard extends Component {
                 <div style={{color: 'white', fontSize: "25px"}}>
                     {this.props.title}
                 </div>
-                <div style={{color: 'white', fontSize: '15px'}}>
+                <div style={{color: 'white', fontSize: '15px', marginBottom: '15px'}}>
                     {this.props.artist}
                 </div>
-                <Button style={{marginTop: "10px", backgroundColor: "#5474E1", color: 'white', width: "150px"}}>
+                <Link style={{marginTop: "30px", backgroundColor: "#5474E1", color: 'white', width: "150px", textDecoration: 'none', borderRadius: "10px", padding: "2px 30px"}} to="/gameplay">
                     Play
-                </Button>
+                </Link>
                 <div>
                     <Rating ratingValue={this.props.stars} stars={3}/>
                 </div>
