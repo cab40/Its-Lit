@@ -47,7 +47,7 @@ void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
 int isActive(u_int8_t data, int low);
 void * startButtonStuff(void * arg);
-void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes);
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes, int * allNotes);
 
 //sorta inter thread communication via shared memory....
 //way too late to do proper synchronization and critical section protection things
@@ -126,7 +126,7 @@ int main(){
     }
 
     musicEnd = 1;
-    printf("Right: %d, Total: %d", rightNotes, totalNotes);
+    printf("Accuracy: %f", ((float)rightNotes)/((float)totalNotes));
     exit(0);
 }
 
