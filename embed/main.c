@@ -78,11 +78,7 @@ int main(){
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
-    //int musicNotes[] = {4, 3, 2, 1, 0, 15, 12, 9, 7, 0, -1};
-    int musicNotesTest[] = {15,0,0,0,0,15,0,13,12,0,0,0,0,0,0,1,0,0,0,0,0,-1};
-    //int musicNotesTest4[] = {8,0,0,0,0,-1};
-    //int musicNotesTest3[] = {3,0,0,0,0,3,0,3,3,0,0,0,0,0,0,2,0,0,0,0,0,-1};
-    //int musicNotesTest2[] = {3,0,0,0,0,-1};
+    int musicNotes[] = {15,0,0,0,0,15,0,13,12,0,0,0,0,0,0,1,0,0,0,0,0,-1};
     int totalNotes = 0;
     int rightNotes = 0;
 
@@ -205,18 +201,30 @@ int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
     }
 }
 
-void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes) {
-    if(isActive(blueGreen, 1) && pressedBlue >= 1) (*rightNotes)++;
-    else if(!isActive(blueGreen, 1) && pressedBlue == 0) (*rightNotes)++;
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes, int * allNotes) {
+    if(isActive(blueGreen, 1)) {
+        (*allNotes)++;
+        if(pressedBlue >= 1) (*rightNotes)++;
+    }
+    else if(!isActive(blueGreen, 1) && pressedBlue >= 1) (*allNotes)++;
 
-    if(isActive(blueGreen, 0) && pressedGreen >= 1) (*rightNotes)++;
-    else if(!isActive(blueGreen, 0) && pressedGreen == 0) (*rightNotes)++;
+    if(isActive(blueGreen, 0)) {
+        (*allNotes)++;
+        if(pressedGreen >= 1) (*rightNotes)++;
+    }
+    else if(!isActive(blueGreen, 0) && pressedGreen >= 1) (*allNotes)++;
 
-    if(isActive(redYellow, 1) && pressedRed >= 1) (*rightNotes)++;
-    else if(!isActive(redYellow, 1) && pressedRed== 0) (*rightNotes)++;
+    if(isActive(redYellow, 1)) {
+        (*allNotes)++;
+        if(pressedRed>= 1) (*rightNotes)++;
+    }
+    else if(!isActive(redYellow, 1) && pressedRed >= 1) (*allNotes)++;
 
-    if(isActive(redYellow, 0) && pressedYellow >= 1) (*rightNotes)++;
-    else if(!isActive(redYellow, 0) && pressedYellow== 0) (*rightNotes)++;
+    if(isActive(redYellow, 0)) {
+        (*allNotes)++;
+        if(pressedYellow >= 1) (*rightNotes)++;
+    }
+    else if(!isActive(redYellow, 0) && pressedYellow >= 0) (*allNotes)++;
 
     pressedYellow = 0;
     pressedRed = 0;
