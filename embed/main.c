@@ -68,14 +68,14 @@ int main(){
     u_int8_t pins[] = {BG_DATA_PIN, BG_LATCH_PIN, BG_CLOCK_PIN, RY_DATA_PIN, RY_LATCH_PIN, RY_CLOCK_PIN, BLUE_BUTTON, GREEN_BUTTON, RED_BUTTON, YELLOW_BUTTON};
     int pinModes[] = {0,0,0,0,0,0,1,1,1,1};
 
-    //pthread_attr_t threadAttr;
-    //if(pthread_attr_init(&threadAttr)){
-    //    printf("Thread attributes not initialized");
-    //    exit(1);
-    //}
-    //button_thread_info buttonThread;
-    //buttonThread.threadNum = 1;
-    //pthread_create(&(buttonThread.threadId), &threadAttr, &startButtonStuff, NULL);
+    pthread_attr_t threadAttr;
+    if(pthread_attr_init(&threadAttr)){
+        printf("Thread attributes not initialized");
+        exit(1);
+    }
+    button_thread_info buttonThread;
+    buttonThread.threadNum = 1;
+    pthread_create(&(buttonThread.threadId), &threadAttr, &startButtonStuff, NULL);
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
