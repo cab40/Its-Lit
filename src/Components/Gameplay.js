@@ -26,12 +26,13 @@ class DisplayPage extends React.Component {
             length: '3:28'
         }
     }
+    
     render() {
         return (
             <div className="App" style={{ width: '100%', height: '100%' }}>
                 <div className="col">
                     <h1 className="glow title">SCORE:</h1>
-                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + Math.random()).toFixed(1)}%</h1>
+                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1>
                     <div className="row musicCard">
                         <div className="col">
                             <img src={this.state.image} style={{ width: '158px', height: '158px', objectFit: 'cover', borderRadius: '8px', marginTop: '10px' }}></img>
@@ -51,7 +52,7 @@ class DisplayPage extends React.Component {
                             <div className="row t-white" style={{ textAlign: 'center' }}>
                                 <h3 className="col t-white" style={{ textAlign: 'left' }}>{this.state.song} - {this.state.artist}</h3>
                                 <div className="col-4">
-                                    <Button onClick={this.onSubmit} className='t-white' size='m' style={{ marginLeft: '70%', width: '100px', backgroundColor: '#5474E1' }}>Stop</Button>
+                                    <Button onClick={this.props.onSubmit} className='t-white' size='m' style={{ marginLeft: '70%', width: '100px', backgroundColor: '#5474E1' }}>{this.props.started? "Stop ": "Start"}</Button>
                                 </div>
                             </div>
                         </div>
@@ -62,12 +63,6 @@ class DisplayPage extends React.Component {
     }
 }
 
-const renderer = ({ minutes, seconds }) => {
-    return (
-        <DisplayPage minutes={minutes} seconds={seconds}/>
-    );
-};
-
 class Gameplay extends React.Component {
     constructor(props) {
         super(props);
@@ -77,19 +72,25 @@ class Gameplay extends React.Component {
             image: 'https://upload.wikimedia.org/wikipedia/en/1/1e/Cage_the_Elephant_Melophobia.jpg',
             song: 'Cigarette Daydreams',
             artist: 'Cage the Elephant',
-            length: '3:28'
+            length: '3:28',
+            started: false
         }
     }
 
     onSubmit = () => {
-        return <Redirect to="../App" />
+        this.countdownref.start();
+        this.setState({
+            started: true
+        })
     }
 
     render() {
         return (
                 <Countdown
-                    date={Date.now() + 5000}
-                    renderer={renderer}
+                    ref={(ref) => {this.countdownref = ref;}}
+                    autoStart={false}
+                    date={Date.now() + (time_length.minutes*60+ time_length.seconds)*1000}
+                    renderer={({minutes, seconds}) => <DisplayPage minutes={minutes} seconds={seconds} onSubmit={this.onSubmit} started={this.state.started}/>}
                 />
         );
     }
