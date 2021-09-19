@@ -78,7 +78,8 @@ int main(){
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
-    int musicNotes[] = {0,0,0,0,0,0,0,0,0,15,13,8,0,9,15,0,13,12,0,7,0,4,5,0,1,0,0,10,11,0,-1};
+    int musicNotesTest[] = {0,0,0,0,0,0,0,0,0,15,13,8,0,9,15,0,13,12,0,7,0,4,5,0,1,0,0,10,11,0,-1};
+    int musicNotes[] = {0,0,0,1,0,0,0,0,0,0,-1};
     int totalNotes = 0;
     int rightNotes = 0;
 
