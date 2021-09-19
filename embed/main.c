@@ -46,7 +46,7 @@ void initialize(int * GPIOPINS, int * GPIODIR, int n); //GPIODIR -> array of int
 void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
 int isActive(u_int8_t data, int low);
-void startButtonStuff();
+void * startButtonStuff(void * arg);
 void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes);
 
 //sorta inter thread communication via shared memory....
@@ -179,7 +179,7 @@ void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t d
   digitalWrite(latchPin, HIGH);
 }
 
-void startButtonStuff(){
+void * startButtonStuff(void * arg){
     int buttonStuff;
     while(!musicEnd){
         buttonStuff = digitalRead(BLUE_BUTTON);
