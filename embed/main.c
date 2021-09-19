@@ -126,7 +126,7 @@ int main(){
     }
 
     musicEnd = 1;
-    printf("Accuracy: %f", ((float)rightNotes)/((float)totalNotes));
+    printf("Accuracy: %f\n", ((float)rightNotes)/((float)totalNotes));
     exit(0);
 }
 
