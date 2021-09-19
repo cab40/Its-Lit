@@ -1,4 +1,4 @@
 to compile do
 gcc -Wall -o lights main.c -lwiringPi
-then
+then to run
 ./lights
