@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS="-Wall" "-lwiringPi"
+CFLAGS="-Wall" "-lwiringPi" "-lpthread"
 
 lights: main.c
 	$(CC) $(CFLAGS) -o lights main.c
