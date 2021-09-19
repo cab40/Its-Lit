@@ -15,16 +15,16 @@ class SongCarousel extends Component {
   slides = [
     {
       key: uuidv4(),
+      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styles" stars={3}/>
+    },
+    {
+      key: uuidv4(),
       content: <SongCard height = {"100%"} img_url="https://miro.medium.com/max/681/1*EBOL4lka5QjcYoxj6AHp-g.png" alt="1" title="Conversations" artist="Juice Wrld" stars={3}/>
     },
     {
       key: uuidv4(),
       content: <SongCard height={"100%"} img_url="https://i.imgur.com/aAEEK.jpeg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
     },
-    {
-      key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styles" stars={3}/>
-    }
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };
   });
