@@ -142,6 +142,8 @@ int main(){
         delay(500);
     }
 
+    printf("Right: %d, Total: %d", rightNotes, totalNotes);
+
     exit(0);
 }
 
