@@ -75,7 +75,7 @@ int main(){
     }
     button_thread_info buttonThread;
     buttonThread.threadNum = 1;
-    pthread_create(buttonThread.threadId, &threadAttr, , NULL);
+    pthread_create(&(buttonThread.threadId), &threadAttr, &startButtonStuff, NULL);
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
@@ -131,7 +131,7 @@ int main(){
         addToRightStuff(blueGreen, redYellow, &rightNotes);
     }
 
-    musicEnd = true;
+    musicEnd = 1;
     printf("Right: %d, Total: %d", rightNotes, totalNotes);
     exit(0);
 }
@@ -203,7 +203,7 @@ int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
     }
 }
 
-void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, u_int8_t * rightNotes) {
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes) {
     if(isActive(blueGreen, 1) && pressedBlue >= 1) (*rightNotes)++;
     else if(!isActive(blueGreen, 1) && pressedBlue == 0) (*rightNotes)++;
 
