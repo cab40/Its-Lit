@@ -45,14 +45,15 @@
 void initialize(int * GPIOPINS, int * GPIODIR, int n); //GPIODIR -> array of integers, 0 for output, 1 for input
 void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
-bool isActive(u_int8_t data, bool low);
+int isActive(u_int8_t data, int low);
 void startButtonStuff();
+void addToRightStuff(u_int8_t * rightNotes, u_int8_t * totalNotes);
 
 //sorta inter thread communication via shared memory....
 //way too late to do proper synchronization and critical section protection things
 //so buggy multithread but whatever for now
 //tired just make it work...
-bool musicEnd = false;
+int musicEnd = 0;
 int pressedBlue = 0;
 int pressedGreen = 0;
 int pressedRed = 0;
@@ -68,7 +69,7 @@ int main(){
     int pinModes[] = {0,0,0,0,0,0,1,1,1,1};
 
     pthread_attr_t threadAttr;
-    if(pthread_attr_init(threadAttr)){
+    if(pthread_attr_init(&threadAttr)){
         printf("Thread attributes not initialized");
         exit(1);
     }
@@ -114,24 +115,9 @@ int main(){
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow); 
         i++;
         totalNotes += 4;
+
         delay(500);
-
-        if(isActive(blueGreen, true) && bluePressed >= 1) rightNotes++;
-        else if(!isActive(blueGreen, true) && bluePressed == 0) rightNotes++;
-
-        if(isActive(blueGreen, false) && greenPressed >= 1) rightNotes++;
-        else if(!isActive(blueGreen, false) && greenPressed == 0) rightNotes++;
-
-        if(isActive(redYellow, true) && redPressed >= 1) rightNotes++;
-        else if(!isActive(redYellow, true) && redPressed == 0) rightNotes++;
-
-        if(isActive(redYellow, false) && yellowPressed >= 1) rightNotes++;
-        else !if(!isActive(redYellow, false) && yellowPressed == 0) rightNotes++;
-
-        yellowPressed = 0;
-        redPressed = 0;
-        greenPressed = 0;
-        bluePressed = 0;
+        addToRightStuff(&rightNotes);
     }
 
     for(int j = 0;j < 4;j++){ //shift 4 more times at end of song to make sure the notes finish
@@ -139,11 +125,14 @@ int main(){
         redYellow = shiftRemove3(redYellow);
         sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow);
+
+        totalNotes += 4;
         delay(500);
+        addToRightStuff(&rightNotes);
     }
 
+    musicEnd = true;
     printf("Right: %d, Total: %d", rightNotes, totalNotes);
-
     exit(0);
 }
 
@@ -206,10 +195,29 @@ void startButtonStuff(){
     }
 }
 
-bool isActive(u_int8_t data, bool low){ //check if the 1st and 5th byte are set
+int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
     if(low){
         return !!(data & 1);
     } else {
         return !!(data & (1 << 4));
     }
+}
+
+void addToRightStuff(u_int8_t * rightNotes) {
+    if(isActive(blueGreen, 1) && pressedBlue >= 1) *rightNotes++;
+    else if(!isActive(blueGreen, 1) && pressedBlue == 0) *rightNotes++;
+
+    if(isActive(blueGreen, 0) && pressedGreen >= 1) *rightNotes++;
+    else if(!isActive(blueGreen, 0) && pressedGreen == 0) *rightNotes++;
+
+    if(isActive(redYellow, 1) && pressedRed >= 1) *rightNotes++;
+    else if(!isActive(redYellow, 1) && pressedRed== 0) *rightNotes++;
+
+    if(isActive(redYellow, 0) && pressedYellow>= 1) *rightNotes++;
+    else !if(!isActive(redYellow, 0) && pressedYellow== 0) *rightNotes++;
+
+    pressedYellow = 0;
+    pressedRed = 0;
+    pressedGreen = 0;
+    pressedBlue = 0;
 }
