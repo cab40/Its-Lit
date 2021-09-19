@@ -180,20 +180,21 @@ void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t d
 }
 
 void * startButtonStuff(void * arg){
-    int buttonStuff;
-    while(!musicEnd){
-        buttonStuff = digitalRead(BLUE_BUTTON);
-        if(buttonStuff) pressedBlue++;
+    //int buttonStuff;
+    //while(!musicEnd){
+    //    buttonStuff = digitalRead(BLUE_BUTTON);
+    //    if(buttonStuff) pressedBlue++;
 
-        buttonStuff = digitalRead(RED_BUTTON);
-        if(buttonStuff) pressedRed++;
+    //    buttonStuff = digitalRead(RED_BUTTON);
+    //    if(buttonStuff) pressedRed++;
 
-        buttonStuff = digitalRead(GREEN_BUTTON);
-        if(buttonStuff) pressedGreen++;
-        buttonStuff = digitalRead(YELLOW_BUTTON);
-        if(buttonStuff) pressedYellow++;
-    }
-    return NULL;
+    //    buttonStuff = digitalRead(GREEN_BUTTON);
+    //    if(buttonStuff) pressedGreen++;
+    //    buttonStuff = digitalRead(YELLOW_BUTTON);
+    //    if(buttonStuff) pressedYellow++;
+    //}
+    void * smth = malloc(5);
+    return smth;
 }
 
 int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
