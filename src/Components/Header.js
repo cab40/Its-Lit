@@ -9,6 +9,7 @@ export default class Header extends React.Component {
             <Link to="/" style={{textDecoration: "none"}}>
                 <div className = 'navbar-style'>
                     <h2 href="#home" className="title-big glow">IT'S LIT</h2>
+                    <div className="pls"></div>
                 </div>
             </Link>
         )
