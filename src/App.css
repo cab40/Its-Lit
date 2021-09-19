@@ -1,6 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&family=Nunito&family=Otomanopee+One&family=Reggae+One&family=VT323&display=swap');
 body {
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
+  font-family: 'Nunito', Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+
+.t-white {
+  color: white;
+}
+
+.title {
+  /* font-family: 'VT323', 'Reggae one','Otomanopee One', Verdana, sans-serif; */
+  font-weight: bolder;
+}
+
+.title-big {
+  font-weight: bolder;
+  font-size: 50px;
+}
+
+.glow {
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px #5474E1, 0 0 30px #5474E1, 0 0 40px #5474E1, 0 0 50px #5474E1;
+}
+
+.glow-gr {
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px #6EDB18, 0 0 30px #6EDB18, 0 0 40px #6EDB18, 0 0 50px #6EDB18;
+}
+
+.glow-pi {
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px #D83B95, 0 0 30px #D83B95, 0 0 40px #D83B95, 0 0 50px #D83B95;
 }
 
 .App {
@@ -15,19 +45,17 @@ body {
   flex-direction: column;
 }
 
+.musicCard{
+  background-color: #1D2442;
+  margin: 0 10% 0 10%;
+  border-radius: 10px;
+  padding: 2%;
+  box-shadow: 0 0 5px #fff, 0 0 10px #5474E1, 0 0 20px #5474E1, 0 0 30px #5474E1;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
