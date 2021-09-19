@@ -98,22 +98,21 @@ int main(){
 
     int i = 0;
     int shiftBits[2]; //(blue, green) and (yellow, red)
-    while(musicNotesTest[i] != -1){
-        shiftBits[0] = musicNotesTest[i] & 1;
-        shiftBits[1] = (musicNotesTest[i] & (1 << 1)) >> 1;
+    while(musicNotes[i] != -1){
+        shiftBits[0] = musicNotes[i] & 1;
+        shiftBits[1] = (musicNotes[i] & (1 << 1)) >> 1;
         blueGreen = shiftRemove3(blueGreen)| (shiftBits[1] << 7 | shiftBits[0] << 3);
 
-        shiftBits[0] = (musicNotesTest[i] & (1 << 2)) >> 2;
-        shiftBits[1] = (musicNotesTest[i] & (1 << 3)) >> 3;
+        shiftBits[0] = (musicNotes[i] & (1 << 2)) >> 2;
+        shiftBits[1] = (musicNotes[i] & (1 << 3)) >> 3;
         redYellow = shiftRemove3(redYellow)| (shiftBits[1] << 7 | shiftBits[0] << 3);
 
         sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow); 
         i++;
-        totalNotes += 4;
 
         delay(300);
-        addToRightStuff(blueGreen, redYellow, &rightNotes);
+        addToRightStuff(blueGreen, redYellow, &rightNotes, &totalNotes);
     }
 
     for(int j = 0;j < 4;j++){ //shift 4 more times at end of song to make sure the notes finish
@@ -122,9 +121,8 @@ int main(){
         sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow);
 
-        totalNotes += 4;
         delay(300);
-        addToRightStuff(blueGreen, redYellow, &rightNotes);
+        addToRightStuff(blueGreen, redYellow, &rightNotes, &totalNotes);
     }
 
     musicEnd = 1;
