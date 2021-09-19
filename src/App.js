@@ -1,10 +1,9 @@
 import React from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import Header from './Components/Header.js';
 import Cards from './Components/Cards.js';
 import {data} from './Components/data.js';
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css';
 
 
 class App extends React.Component{
