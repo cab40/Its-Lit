@@ -21,3 +21,15 @@
     width:150px;
     height:150px;
 }
+
+.songCard-style{
+    background-color: #1D2442;
+    border-radius: 10px;
+    border-width: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px #fff, 0 0 10px #5474E1, 0 0 20px #5474E1, 0 0 30px #5474E1;
+}

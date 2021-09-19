@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Button, Row} from "reactstrap";
 import { Rating } from 'react-simple-star-rating';
+import './cardStyle.css';
 
 class Star extends Component {
     render(){
@@ -21,7 +22,7 @@ export default class SongCard extends Component {
 
     render(){
         return(
-            <div style={{backgroundColor: "#1D2442", borderRadius: '0px', borderWidth: "0px", padding: "0px", width: '100%', height: '100%', alignItems: 'center', justifyContent: "center"}}>
+            <div className = "songCard-style">
                 <img style={{width: "90%", height: "70%", margin: '0px auto'}} src={this.props.img_url}/>
                 <div style={{color: 'white', fontSize: "25px"}}>
                     {this.props.title}
@@ -32,7 +33,7 @@ export default class SongCard extends Component {
                 <Button style={{marginTop: "10px", backgroundColor: "#5474E1", color: 'white', width: "150px"}}>
                     Play
                 </Button>
-                <div>
+                <div style={{paddingTop: "10px"}}>
                     <Rating ratingValue={this.props.stars} stars={3}/>
                 </div>
             </div>

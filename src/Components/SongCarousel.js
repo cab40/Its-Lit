@@ -19,11 +19,11 @@ class SongCarousel extends Component {
     },
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://images.squarespace-cdn.com/content/v1/59e68533d7bdce9ebbc3cef8/1508314396682-AGNY197TJ8159B3L3BD7/graduation.jpg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
+      content: <SongCard height={"100%"} img_url="https://i.imgur.com/aAEEK.jpeg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
     },
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styls" stars={3}/>
+      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styles" stars={3}/>
     }
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };
@@ -31,7 +31,7 @@ class SongCarousel extends Component {
 
   render() {
     return (
-      <div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
+      <div style={{ width: "60%", height: "500px", margin: "0 auto" }}>
         <Carousel
           style={{height: "20%", width: "100%"}}
           slides={this.slides}
