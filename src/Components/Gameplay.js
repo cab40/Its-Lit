@@ -4,6 +4,7 @@ import { data } from './data.js';
 import { Redirect, Link } from 'react-router-dom';
 import { Button, Progress } from 'reactstrap';
 import Countdown from 'react-countdown';
+import Confetti from 'react-confetti'
 
 import '../App.css';
 
@@ -19,7 +20,7 @@ class DisplayPage extends React.Component {
         super(props);
         this.state = {
             image: "https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg",
-            song: "Golden",
+            song: "Falling",
             artist: "Harry Styles"
         }
     }
@@ -30,10 +31,11 @@ class DisplayPage extends React.Component {
                 <div className="col">
                     {this.props.completed?
                     <>
+                    <Confetti style={{width: "100%"}} width={"500%"} height={"500px"}/>
                     <h1 className="glow title">SCORE:</h1>
                     <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1> 
                     </>:
-                    <h1 className="glow-pi title-big" style={{ fontSize: '8rem', padding: '1rem' }}>Currently Playing</h1>}
+                    <h1 className="glow-pi title-big" style={{ fontSize: '5rem', padding: '1rem' }}>Currently Playing</h1>}
                     <div className="row musicCard">
                         <div className="col">
                             <img src={this.state.image} style={{ width: '158px', height: '158px', objectFit: 'cover', borderRadius: '8px', marginTop: '10px' }}></img>
@@ -71,12 +73,6 @@ class Gameplay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //score variable?
-            //image: 'https://upload.wikimedia.org/wikipedia/en/7/70/Graduation_%28album%29.jpg',
-            image: 'https://upload.wikimedia.org/wikipedia/en/1/1e/Cage_the_Elephant_Melophobia.jpg',
-            song: 'Cigarette Daydreams',
-            artist: 'Cage the Elephant',
-            length: '3:28',
             started: false 
         }
     }
