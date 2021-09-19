@@ -23,7 +23,7 @@ class SongCarousel extends Component {
     },
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://images.squarespace-cdn.com/content/v1/59e68533d7bdce9ebbc3cef8/1508314396682-AGNY197TJ8159B3L3BD7/graduation.jpg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
+      content: <SongCard height={"100%"} img_url="https://i.imgur.com/aAEEK.jpeg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
     },
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };

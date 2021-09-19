@@ -25,7 +25,7 @@ export default class SongCard extends Component {
                 <Link style={{marginTop: "30px", backgroundColor: "#5474E1", color: 'white', width: "150px", textDecoration: 'none', borderRadius: "10px", padding: "2px 30px"}} to="/gameplay">
                     Play
                 </Link>
-                <div>
+                <div style={{marginTop: '10px'}}>
                     <Rating ratingValue={this.props.stars} stars={3}/>
                 </div>
             </div>
