@@ -47,7 +47,7 @@ void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
 int isActive(u_int8_t data, int low);
 void startButtonStuff();
-void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, u_int8_t * rightNotes);
+void addToRightStuff(u_int8_t blueGreen, u_int8_t redYellow, int * rightNotes);
 
 //sorta inter thread communication via shared memory....
 //way too late to do proper synchronization and critical section protection things
