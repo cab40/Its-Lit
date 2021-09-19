@@ -1,0 +1,23 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BG_CLOCK_PIN	main.c	/^#define BG_CLOCK_PIN /;"	d	file:
+BG_DATA_PIN	main.c	/^#define BG_DATA_PIN /;"	d	file:
+BG_LATCH_PIN	main.c	/^#define BG_LATCH_PIN /;"	d	file:
+BLUE_BUTTON	main.c	/^#define BLUE_BUTTON /;"	d	file:
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS="-Wall" "-lwiringPi"$/;"	m
+GREEN_BUTTON	main.c	/^#define GREEN_BUTTON /;"	d	file:
+RED_BUTTON	main.c	/^#define RED_BUTTON /;"	d	file:
+RY_CLOCK_PIN	main.c	/^#define RY_CLOCK_PIN /;"	d	file:
+RY_DATA_PIN	main.c	/^#define RY_DATA_PIN /;"	d	file:
+RY_LATCH_PIN	main.c	/^#define RY_LATCH_PIN /;"	d	file:
+YELLOW_BUTTON	main.c	/^#define YELLOW_BUTTON /;"	d	file:
+destroyPins	main.c	/^void destroyPins(int * GPIOPINS, int n){$/;"	f
+initialize	main.c	/^void initialize(int * GPIOPINS, int * GPIODIR, int n){$/;"	f
+main	main.c	/^int main(){$/;"	f
+sendData	main.c	/^void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data){$/;"	f
+shiftRemove3	main.c	/^#define shiftRemove3(/;"	d	file:

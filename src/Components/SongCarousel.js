@@ -31,7 +31,7 @@ class SongCarousel extends Component {
 
   render() {
     return (
-      <div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
+      <div style={{ width: "60%", height: "500px", margin: "0 auto" }}>
         <Carousel
           style={{height: "20%", width: "100%"}}
           slides={this.slides}
