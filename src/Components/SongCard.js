@@ -11,7 +11,7 @@ export default class SongCard extends Component {
     render(){
         return(
             <div className = "songCard-style">
-                <img style={{width: "", height: "70%", margin: '0px auto'}} src={this.props.img_url}/>
+                <img style={{width: "", height: "70%", margin: '0px auto', borderRadius:'10px 10px 0 0'}} src={this.props.img_url}/>
                 <div style={{color: 'white', fontSize: "25px"}}>
                     {this.props.title}
                 </div>

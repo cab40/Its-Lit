@@ -31,7 +31,7 @@ class SongCarousel extends Component {
     },
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://i.pinimg.com/originals/06/45/40/0645408494a6f638128af1037418cd88.jpg" title="Electric Feel" artist="MGMT" stars={2}/>
+      content: <SongCard height={"100%"} img_url="https://www.theedgesusu.co.uk/wp-content/uploads/2020/07/mgmt.jpg" title="Electric Feel" artist="MGMT" stars={2}/>
     }
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };
