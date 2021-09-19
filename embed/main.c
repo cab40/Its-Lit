@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <wiringPi.h>
+#include <pthread.h>
 
 //SN74HC595N shift reg
 //GPIO pin stuff:
@@ -44,20 +45,49 @@
 void initialize(int * GPIOPINS, int * GPIODIR, int n); //GPIODIR -> array of integers, 0 for output, 1 for input
 void destroyPins(int * GPIOPINS, int n);
 void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t data);
+bool isActive(u_int8_t data, bool low);
+void startButtonStuff();
+
+//sorta inter thread communication via shared memory....
+//way too late to do proper synchronization and critical section protection things
+//so buggy multithread but whatever for now
+//tired just make it work...
+bool musicEnd = false;
+int pressedBlue = 0;
+int pressedGreen = 0;
+int pressedRed = 0;
+int pressedYellow = 0;
+
+typedef struct button_thread_info {
+    pthread_t threadId;
+    int threadNum;
+} button_thread_info;
 
 int main(){
     u_int8_t pins[] = {BG_DATA_PIN, BG_LATCH_PIN, BG_CLOCK_PIN, RY_DATA_PIN, RY_LATCH_PIN, RY_CLOCK_PIN, BLUE_BUTTON, GREEN_BUTTON, RED_BUTTON, YELLOW_BUTTON};
     int pinModes[] = {0,0,0,0,0,0,1,1,1,1};
 
-    u_int8_t blueGreen = 0;
-    u_int8_t redYellow = 0;
+    pthread_attr_t threadAttr;
+    if(pthread_attr_init(threadAttr)){
+        printf("Thread attributes not initialized");
+        exit(1);
+    }
+    button_thread_info buttonThread;
+    buttonThread.threadNum = 1;
+    pthread_create(buttonThread.threadId, &threadAttr, , NULL);
+
+    u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
+    u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
     int musicNotes[] = {4, 3, 2, 1, 0, 15, 12, 9, 7, 0, -1};
     int musicNotesTest[] = {15,0,0,0,0,15,0,13,12,0,0,0,0,0,0,1,0,0,0,0,0,-1};
     int musicNotesTest4[] = {8,0,0,0,0,-1};
     int musicNotesTest3[] = {3,0,0,0,0,3,0,3,3,0,0,0,0,0,0,2,0,0,0,0,0,-1};
     int musicNotesTest2[] = {3,0,0,0,0,-1};
+    int totalNotes = 0;
+    int rightNotes = 0;
+
     //Next note is in binary
-    //lowest 4 bits bbbb denote if there is a next note for red, yellow, green, blue respectively
+    //lowest 4 bits bbbb denote if there is a next note for yellow, red, green, blue respectively
     //so 1000 or 8 means there is a note for yellow next, -1 is end
 
     wiringPiSetup();
@@ -83,7 +113,25 @@ int main(){
         sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow); 
         i++;
+        totalNotes += 4;
         delay(500);
+
+        if(isActive(blueGreen, true) && bluePressed >= 1) rightNotes++;
+        else if(!isActive(blueGreen, true) && bluePressed == 0) rightNotes++;
+
+        if(isActive(blueGreen, false) && greenPressed >= 1) rightNotes++;
+        else if(!isActive(blueGreen, false) && greenPressed == 0) rightNotes++;
+
+        if(isActive(redYellow, true) && redPressed >= 1) rightNotes++;
+        else if(!isActive(redYellow, true) && redPressed == 0) rightNotes++;
+
+        if(isActive(redYellow, false) && yellowPressed >= 1) rightNotes++;
+        else !if(!isActive(redYellow, false) && yellowPressed == 0) rightNotes++;
+
+        yellowPressed = 0;
+        redPressed = 0;
+        greenPressed = 0;
+        bluePressed = 0;
     }
 
     for(int j = 0;j < 4;j++){ //shift 4 more times at end of song to make sure the notes finish
@@ -138,4 +186,28 @@ void sendData(u_int8_t dataPin, u_int8_t clockPin, u_int8_t latchPin, u_int8_t d
   digitalWrite(clockPin, LOW);
   digitalWrite(dataPin, LOW);
   digitalWrite(latchPin, HIGH);
+}
+
+void startButtonStuff(){
+    int buttonStuff;
+    while(!musicEnd){
+        buttonStuff = digitalRead(BLUE_BUTTON);
+        if(buttonStuff) pressedBlue++;
+
+        buttonStuff = digitalRead(RED_BUTTON);
+        if(buttonStuff) pressedRed++;
+
+        buttonStuff = digitalRead(GREEN_BUTTON);
+        if(buttonStuff) pressedGreen++;
+        buttonStuff = digitalRead(YELLOW_BUTTON);
+        if(buttonStuff) pressedYellow++;
+    }
+}
+
+bool isActive(u_int8_t data, bool low){ //check if the 1st and 5th byte are set
+    if(low){
+        return !!(data & 1);
+    } else {
+        return !!(data & (1 << 4));
+    }
 }
