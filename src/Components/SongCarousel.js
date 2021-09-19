@@ -15,7 +15,7 @@ class SongCarousel extends Component {
   slides = [
     {
       key: uuidv4(),
-      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Golden" artist="Harry Styles" stars={3}/>
+      content: <SongCard height={"100%"} img_url="https://i.mdel.net/i/db/2019/12/1255378/1255378-800w.jpg" alt="3" title="Falling" artist="Harry Styles" stars={3}/>
     },
     {
       key: uuidv4(),
