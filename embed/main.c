@@ -88,10 +88,10 @@ int main(){
     u_int8_t blueGreen = 0;
     u_int8_t redYellow = 0;
     int musicNotes[] = {4, 3, 2, 1, 0, 15, 12, 9, 7, 0, -1};
-    int musicNotesTest[] = {12,0,0,0,0,12,0,12,12,0,0,0,0,0,0,8,0,0,0,0,0,-1};
-    int musicNotesTest2[] = {8,0,0,0,0,-1};
+    int musicNotesTest[] = {15,0,0,0,0,15,0,13,12,0,0,0,0,0,0,1,0,0,0,0,0,-1};
+    int musicNotesTest4[] = {8,0,0,0,0,-1};
     int musicNotesTest3[] = {3,0,0,0,0,3,0,3,3,0,0,0,0,0,0,2,0,0,0,0,0,-1};
-    int musicNotesTest4[] = {3,0,0,0,0,-1};
+    int musicNotesTest2[] = {3,0,0,0,0,-1};
     //Next note is in binary
     //lowest 4 bits bbbb denote if there is a next note for red, yellow, green, blue respectively
     //so 1000 or 8 means there is a note for yellow next, -1 is end
@@ -108,24 +108,24 @@ int main(){
     int i = 0;
     int shiftBits[2]; //(blue, green) and (red, yellow)
     while(musicNotesTest[i] != -1){
-        //shiftBits[0] = musicNotesTest[i] & 1;
-        //shiftBits[1] = (musicNotesTest[i] & (1 << 1)) >> 1;
-        //blueGreen = shiftRemove3(blueGreen)| (shiftBits[1] << 7 | shiftBits[0] << 3);
+        shiftBits[0] = musicNotesTest[i] & 1;
+        shiftBits[1] = (musicNotesTest[i] & (1 << 1)) >> 1;
+        blueGreen = shiftRemove3(blueGreen)| (shiftBits[1] << 7 | shiftBits[0] << 3);
 
         shiftBits[0] = (musicNotesTest[i] & (1 << 2)) >> 2;
         shiftBits[1] = (musicNotesTest[i] & (1 << 3)) >> 3;
         redYellow = shiftRemove3(redYellow)| (shiftBits[1] << 7 | shiftBits[0] << 3);
 
-        //sendData(BGDATA, BGCLOCK, BGLATCH, blueGreen);
+        sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow); 
         i++;
         delay(500);
     }
 
     for(int j = 0;j < 4;j++){ //finish the sequence here
-        //blueGreen = shiftRemove3(blueGreen);
+        blueGreen = shiftRemove3(blueGreen);
         redYellow = shiftRemove3(redYellow);
-        //sendData(BGDATA, BGCLOCK, BGLATCH, blueGreen);
+        sendData(BG_DATA_PIN, BG_CLOCK_PIN, BG_LATCH_PIN, blueGreen);
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow);
         delay(500);
     }
