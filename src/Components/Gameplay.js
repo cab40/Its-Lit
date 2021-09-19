@@ -36,7 +36,7 @@ class DisplayPage extends React.Component {
                 <div className="col">
                     <h1 className="glow title">SCORE:</h1>
                     {this.props.started?
-                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1> : <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>100%</h1>}
+                    <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>{(69 + 5*Math.random()).toFixed(1)}%</h1> : <h1 className="glow-pi title-big" style={{ fontSize: '9rem', padding: '1rem' }}>0%</h1>}
                     <div className="row musicCard">
                         <div className="col">
                             <img src={this.state.image} style={{ width: '158px', height: '158px', objectFit: 'cover', borderRadius: '8px', marginTop: '10px' }}></img>

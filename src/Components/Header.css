@@ -1,5 +1,6 @@
 .navbar-style {
     position: sticky;
+    width: 100%;
     padding: 2%;
     margin-bottom: 3rem;
     background-color: #1D2442;
