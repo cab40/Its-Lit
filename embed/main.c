@@ -78,7 +78,7 @@ int main(){
 
     u_int8_t blueGreen = 0; //green is high 4 bit, blue is low 4 bits
     u_int8_t redYellow = 0; //yellow is high 4 bit, red is low 4 bits
-    int musicNotes[] = {15,0,0,0,0,15,0,13,12,0,0,0,0,0,0,1,0,0,0,0,0,-1};
+    int musicNotes[] = {15,13,8,0,9,15,0,13,12,0,7,0,4,5,0,1,0,0,10,11,0,-1};
     int totalNotes = 0;
     int rightNotes = 0;
 
@@ -112,7 +112,7 @@ int main(){
         i++;
         totalNotes += 4;
 
-        delay(500);
+        delay(300);
         addToRightStuff(blueGreen, redYellow, &rightNotes);
     }
 
@@ -123,7 +123,7 @@ int main(){
         sendData(RY_DATA_PIN, RY_CLOCK_PIN, RY_LATCH_PIN, redYellow);
 
         totalNotes += 4;
-        delay(500);
+        delay(300);
         addToRightStuff(blueGreen, redYellow, &rightNotes);
     }
 
