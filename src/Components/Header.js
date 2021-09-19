@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css';
 import './Header.css';
 import {Link} from "react-router-dom";
 
@@ -7,7 +8,7 @@ export default class Header extends React.Component {
         return (
             <Link to="/" style={{textDecoration: "none"}}>
                 <div className = 'navbar-style'>
-                    <h2 href="#home">PIANO TILES</h2>
+                    <h2 href="#home" className="title-big glow">PIANO TILES</h2>
                 </div>
             </Link>
         )
