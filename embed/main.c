@@ -193,6 +193,7 @@ void * startButtonStuff(void * arg){
         buttonStuff = digitalRead(YELLOW_BUTTON);
         if(buttonStuff) pressedYellow++;
     }
+    return NULL;
 }
 
 int isActive(u_int8_t data, int low){ //check if the 1st and 5th byte are set
