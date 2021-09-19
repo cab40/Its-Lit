@@ -8,14 +8,10 @@ export default class SongCard extends Component {
         super(props);
     }
 
-    onClick = () => {
-        console.log("HI");
-    }
-
     render(){
         return(
             <div className = "songCard-style">
-                <img style={{width: "90%", height: "70%", margin: '0px auto'}} src={this.props.img_url}/>
+                <img style={{width: "", height: "70%", margin: '0px auto'}} src={this.props.img_url}/>
                 <div style={{color: 'white', fontSize: "25px"}}>
                     {this.props.title}
                 </div>

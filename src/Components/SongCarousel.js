@@ -25,6 +25,14 @@ class SongCarousel extends Component {
       key: uuidv4(),
       content: <SongCard height={"100%"} img_url="https://i.imgur.com/aAEEK.jpeg" alt="2" title="Stronger" artist="Kanye West" stars={2}/>
     },
+    {
+      key: uuidv4(),
+      content: <SongCard height={"100%"} img_url="https://cdn.vox-cdn.com/thumbor/Hpg3H7GrYqwnu-ivmqV8Tz4moXY=/0x81:493x410/1400x1400/filters:focal(0x81:493x410):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49657923/Screen_Shot_2016-05-01_at_12.14.34_PM.0.0.png" title="No Problem" artist="Chance the Rapper" stars={1}/>
+    },
+    {
+      key: uuidv4(),
+      content: <SongCard height={"100%"} img_url="https://i.pinimg.com/originals/06/45/40/0645408494a6f638128af1037418cd88.jpg" title="Electric Feel" artist="MGMT" stars={2}/>
+    }
   ].map((slide, index) => {
     return { ...slide, onClick: () => this.setState({ goToSlide: index }) };
   });
