@@ -54,10 +54,3 @@ body {
   padding: 2%;
   box-shadow: 0 0 5px #fff, 0 0 10px #5474E1, 0 0 20px #5474E1, 0 0 30px #5474E1;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
